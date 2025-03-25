@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -6618283297745006520}
   - component: {fileID: 57970090396823859}
   m_Layer: 0
-  m_Name: Ball
-  m_TagString: Ball
+  m_Name: Cherry
+  m_TagString: Cherry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,8 +55,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.355378
-  m_Center: {x: -0.18252353, y: -0.11955882, z: -1.3124309}
+  m_Radius: 1.8872845
+  m_Center: {x: -0.18252353, y: -0.19992234, z: 0.14280427}
 --- !u!54 &7733355894845816391
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 8
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!114 &9062568187436787175
 MonoBehaviour:
@@ -117,8 +117,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5578536
-  m_Center: {x: -0.18944637, y: -0.16518556, z: 0.20275146}
+  m_Radius: 1.9043075
+  m_Center: {x: -0.16228808, y: -0.17770466, z: 0.19339602}
 --- !u!212 &57970090396823859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1016834475, guid: 7e640173648bbd14496fea22831b6173, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -15,13 +15,17 @@ public class PlayerController : MonoBehaviour
     public bool isJumping = false;
 
     public bool hasPowerup = false;
-    public float capsuleDuration = 5;
+    public bool hasBanana = false;
+    public float waterDuration = 5;
+    public float bananaDuration = 3;
 
     private GameManager gameManager;
+    private GameObject player2;
+ 
     private int pointValue = 1;
 
     private float scaleMod = .35f;
-    private float powerUpScaleMod = 1.5f;
+    private float powerUpScaleMod = 1.25f;
 
     private Animator playerAnim;
 
@@ -30,8 +34,9 @@ public class PlayerController : MonoBehaviour
     { 
         playerRb = GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        player2 = GameObject.Find("Player 2");
         Physics.gravity *= gravityModifier;
-        playerAnim = GetComponent<Animator>();
+        //playerAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -66,36 +71,77 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             isJumping = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.V) && Mathf.Abs(player2.transform.position.x - transform.position.x) < 2)
+        {
+            Rigidbody p2Rigidbody = player2.GetComponent<Rigidbody>();
+            Vector3 awayFromPlayer = (player2.transform.position - transform.position);
+            p2Rigidbody.AddForce(awayFromPlayer * 10, ForceMode.Impulse);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        /*if (collision.gameObject.CompareTag("Player2"))
+        {
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                Rigidbody p2Rigidbody = collision.gameObject.GetComponent<Rigidbody>();
+                Vector3 awayFromPlayer = (collision.gameObject.transform.position - transform.position);
+                p2Rigidbody.AddForce(awayFromPlayer * 10, ForceMode.Impulse);
+            }
+            
+        }*/
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
             isJumping = false;
         }
 
-        else if (collision.gameObject.CompareTag("Ball"))
+        else if (collision.gameObject.CompareTag("Cherry"))
         {
             Destroy(collision.gameObject);
             playerRb.velocity = Vector3.zero;
             gameManager.UpdateP1Score(pointValue);
         }
-        else if (collision.gameObject.CompareTag("Capsule"))
+        else if (collision.gameObject.CompareTag("Peach"))
+        {
+            Destroy(collision.gameObject);
+            playerRb.velocity = Vector3.zero;
+            gameManager.UpdateP1Score(pointValue + 1);
+        }
+        else if (collision.gameObject.CompareTag("Watermelon"))
         {
             Destroy(collision.gameObject);
             playerRb.velocity = Vector3.zero;
             hasPowerup = true;
             transform.localScale = new Vector3 (scaleMod, scaleMod, scaleMod) * powerUpScaleMod;
-            StartCoroutine(CapsuleCooldown());
+            StartCoroutine(WatermelonCooldown());
+        }
+        else if (collision.gameObject.CompareTag("Banana"))
+        {
+            Destroy(collision.gameObject);
+            playerRb.velocity = Vector3.zero;
+            hasBanana = true;
+            transform.localScale = new Vector3(-scaleMod, -scaleMod, -scaleMod);
+            speed = 0;
+            StartCoroutine (BananaCooldown()); 
         }
     }
 
-    IEnumerator CapsuleCooldown()
+    IEnumerator WatermelonCooldown()
     {
-        yield return new WaitForSeconds(capsuleDuration);
+        yield return new WaitForSeconds(waterDuration);
         hasPowerup = false;
         transform.localScale = new Vector3 (scaleMod, scaleMod, scaleMod);
+    }
+
+    IEnumerator BananaCooldown()
+    {
+        yield return new WaitForSeconds(bananaDuration);
+        hasBanana = false;
+        transform.localScale = new Vector3(scaleMod, scaleMod, scaleMod);
+        speed = 10;
     }
 }

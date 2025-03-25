@@ -6,8 +6,10 @@ TagManager:
   tags:
   - Ground
   - Player2
-  - Ball
-  - Capsule
+  - Cherry
+  - Peach
+  - Watermelon
+  - Banana
   layers:
   - Default
   - TransparentFX
