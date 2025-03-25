@@ -20,7 +20,7 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnCountdownCoroutine()
     {
-        yield return new WaitForSeconds(Random.Range (1, 3));
+        yield return new WaitForSeconds(Random.Range (2, 5));
         SpawnRandom();
     }
 
@@ -50,9 +50,15 @@ public class Spawner : MonoBehaviour
 
     void SpawnRandom()
     {
+            
+        int spawnNumber = Random.Range(1, 4);
+        for (int i = 0; i < spawnNumber; i++)
+        {
             int spawnIndex = Random.Range(0, spawnPrefabs.Length);
             Instantiate(spawnPrefabs[spawnIndex], transform.position + offset, transform.rotation);
-            StartCoroutine(SpawnCountdownCoroutine());
+            
+        }
+        StartCoroutine(SpawnCountdownCoroutine());
     }
 
 
