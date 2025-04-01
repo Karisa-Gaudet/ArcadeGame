@@ -30,11 +30,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (p1Score == 100)
+        if (p1Score >= 100)
         {
             GameOver1();
         }
-        else if (p2Score == 100) 
+        else if (p2Score >= 100) 
         {
             GameOver2();
         }
