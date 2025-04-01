@@ -11,6 +11,7 @@ TagManager:
   - Watermelon
   - Banana
   - Pear
+  - Apple
   layers:
   - Default
   - TransparentFX
