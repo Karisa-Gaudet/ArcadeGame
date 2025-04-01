@@ -10,10 +10,12 @@ public class Spawner : MonoBehaviour
 
     private float xRange = 8;
     public bool isMovingRight;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         SpawnRandom();
         //StartCoroutine(SpawnCountdownCoroutine());
     }
@@ -48,17 +50,22 @@ public class Spawner : MonoBehaviour
         
     }
 
-    void SpawnRandom()
+    public void SpawnRandom()
     {
-            
-        int spawnNumber = Random.Range(1, 4);
-        for (int i = 0; i < spawnNumber; i++)
+        if (gameManager.isGameActive)
         {
-            int spawnIndex = Random.Range(0, spawnPrefabs.Length);
-            Instantiate(spawnPrefabs[spawnIndex], transform.position + offset, transform.rotation);
-            
+            int spawnNumber = Random.Range(1, 4);
+            for (int i = 0; i < spawnNumber; i++)
+            {
+                int spawnIndex = Random.Range(0, spawnPrefabs.Length);
+                Instantiate(spawnPrefabs[spawnIndex], transform.position + offset, transform.rotation);
+
+            }
+            StartCoroutine(SpawnCountdownCoroutine());
+
         }
-        StartCoroutine(SpawnCountdownCoroutine());
+            
+        
     }
 
 

@@ -10,6 +10,7 @@ TagManager:
   - Peach
   - Watermelon
   - Banana
+  - Pear
   layers:
   - Default
   - TransparentFX
