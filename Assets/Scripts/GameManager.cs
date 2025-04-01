@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
+
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -35,6 +37,11 @@ public class GameManager : MonoBehaviour
         else if (p2Score == 100) 
         {
             GameOver2();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
